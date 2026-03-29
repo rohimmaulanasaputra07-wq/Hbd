@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise Ulang Tahun</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1a1a2e, #3a0ca3);
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    /* Layar awal */
+    .start-screen {
+        position: absolute;
+        text-align: center;
+        cursor: pointer;
+        animation: fadeIn 2s ease;
+    }
+
+    .start-screen h2 {
+        font-size: 22px;
+        color: #ffccd5;
+        animation: glow 2s infinite alternate;
+    }
+
+    /* Card ucapan */
+    .card {
+        display: none;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(15px);
+        padding: 30px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255,182,193,0.4);
+        max-width: 350px;
+        animation: fadeIn 2s ease;
+    }
+
+    .card img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        animation: floatImg 4s ease-in-out infinite;
+    }
+
+    h1 {
+        color: #ffccd5;
+        animation: glow 2s infinite alternate;
+    }
+
+    /* Sakura */
+    .sakura {
+        position: absolute;
+        top: -10px;
+        width: 15px;
+        height: 15px;
+        background: pink;
+        border-radius: 50%;
+        opacity: 0.7;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatImg {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #ffb3c6; }
+        to { text-shadow: 0 0 20px #ff4d6d; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Musik -->
+<audio id="music" loop>
+    <source src="The 1975 - About You Official.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Tampilan awal -->
+<div class="start-screen" onclick="openCard()">
+    <h2>🎁 Klik untuk buka surprise 🎁</h2>
+</div>
+
+<!-- Card ucapan -->
+<div class="card" id="card">
+    <img src="Gambar WhatsApp 2025-07-27 pukul 22.26.03_c8f1d351.jpg">
+    <h1>🌸ニューアニッサ🌸</h1>
+    <p>Selamat ulang tahun! Semoga impian mu tercapai ya kak? awokawok ✨</p>
+</div>
+
+<script>
+function openCard() {
+    document.querySelector(".start-screen").style.display = "none";
+    document.getElementById("card").style.display = "block";
+
+    // Play musik setelah klik (biar tidak diblok browser)
+    document.getElementById("music").play();
+
+    // Sakura muncul setelah klik
+    for (let i = 0; i < 30; i++) {
+        let sakura = document.createElement("div");
+        sakura.classList.add("sakura");
+        sakura.style.left = Math.random() * window.innerWidth + "px";
+        sakura.style.animationDuration = (5 + Math.random() * 5) + "s";
+        sakura.style.opacity = Math.random();
+        document.body.appendChild(sakura);
+    }
+}
+</script>
+
+</body>
+</html>
